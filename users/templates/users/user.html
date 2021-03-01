@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Страница авторизации
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="text-center">Страница авторизации</h1>
+        <form class="form-reg auth" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-outline-warning" type="submit">Войти</button>
+
+        </form>        
+    </div>
+{% endblock %}

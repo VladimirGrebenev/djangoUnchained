@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    Кабинет пользователя
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h1 class="text-center">Кабинет пользователя</h1>
+        <p>{{ user.username }}</p>
+        <p>{{ user.email }}</p>
+    </div>
+{% endblock %}
