@@ -25,7 +25,7 @@ SECRET_KEY = 'a9y6%kr)4g05q_0+5ll5e5&+1e8=cnc54^4(!szuxsc+=s94g('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['django-unchained-blog.herokuapp.com']
 
 
 # Application definition
