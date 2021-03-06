@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="text-center">{{ title }}</h1>
+        <form class="form-create-news" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn btn-outline-warning" type="submit">
+                {{ btn_txt }}
+            </button>
+        </form>
+    </div>
+{% endblock %}

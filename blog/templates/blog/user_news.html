@@ -9,11 +9,10 @@
     <container class="text-center">
         <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
             <main role="main" class="inner cover mt-5">
-                <h1 class="cover-heading">{{ title }}</h1>
-                <p class="lead">Cover is a one-page template for building simple
-                    and beautiful home pages. Download, edit
-                    the text, and add your own fullscreen background photo to
-                    make it your own.</p>
+                <h1 class="cover-heading">Всё статьи от автора
+                    {{ view.kwargs.username }}</h1>
+                <p class="lead"> Количество статей у автора:
+                    {{ page_obj.paginator.count }}</p>
                 <p class="lead">
                     <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
                 </p>
@@ -75,7 +74,5 @@
                 btn-outline-primary">Последняя</a>
             {% endif %}
         {% endif %}
-
-
     </container>
 {% endblock %}

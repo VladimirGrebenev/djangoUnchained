@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <div class="blog-post">
+        <h2 class="blog-post-title">{{ object.title }}</h2>
+        <p class="blog-post-meta">{{ object.date|date:"j/b/Y G:i" }}
+            <img src="{{ object.auther.profile.img.url }}" al
+                 t="{{ object.auther }}"
+                 class="user_images">
+            <a href="{% url 'user-news' object.auther %}">{{ object.auther }}</a>
+        </p>
+        {#        не работает загрузка картинки#}
+        {#        <img width="200" height="250" src="{{ object.image.url }}">#}
+        <p>{{ object.text|safe }}</p>
+    </div>
+    {% if object.auther == user %}
+        <a href="{% url 'news-delete' object.id %}">
+            <button class="btn btn-outline-danger
+                    mr-1">Удалить статью
+            </button>
+        </a>
+        <a href="{% url 'news-update' object.id %}">
+            <button class="btn btn-outline-warning mr-1">Редактировать</button>
+        </a>
+        <a href="{% url 'news-add' %}">
+            <button class="btn btn-outline-success">Добавить ещё статью</button>
+        </a>
+    {% endif %}
+{% endblock %}

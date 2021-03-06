@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 # from django.contrib.auth.forms import UserCreationForm
-from .forms import UserRegisterForm
+from .forms import UserRegisterForm, ProfileImage, UserUpdateForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -13,7 +13,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Пользователь {username} был успешно создан')
-            return  redirect('home')
+            return redirect('home')
 
     else:
         form = UserRegisterForm()
@@ -28,4 +28,22 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.method == 'POST':
+        profileForm = ProfileImage(request.POST, request.FILES, instance=request.user.profile)
+        updateUserForm = UserUpdateForm(request.POST, instance=request.user)
+
+        if profileForm.is_valid() and updateUserForm.is_valid():
+            updateUserForm.save()
+            profileForm.save()
+            messages.success(request, f'ваш аккаунт был обновлён')
+            return redirect('profile')
+    else:
+        profileForm = ProfileImage(instance=request.user.profile)
+        updateUserForm = UserUpdateForm(instance=request.user)
+
+    data = {
+        'profileForm': profileForm,
+        'updateUserForm': updateUserForm
+    }
+
+    return render(request, 'users/profile.html', data)

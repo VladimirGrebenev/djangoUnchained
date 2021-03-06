@@ -8,7 +8,25 @@
 {% block content %}
     <div>
         <h1 class="text-center">Кабинет пользователя</h1>
-        <p>{{ user.username }}</p>
-        <p>{{ user.email }}</p>
+        <div class="media text-muted pt-3">
+            <img class="bd-placeholder-img mr-2 rounded" width="64" height="64" src="{{ user.profile.img.url }}">
+            </img>
+            <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                <strong class="d-block text-gray-dark">{{ user.username }}</strong>
+                {% if user.email %}
+                    <b>Email:</b>{{ user.email }}
+                {% endif %}
+
+            </p>
+        </div>
+    </div>
+    <div>
+        <h4 class="text-center mt-5">Обновить информацию профиля</h4>
+        <form class="form-reg mt-4" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            {{ updateUserForm.as_p }}
+            {{ profileForm.as_p }}
+            <button class="btn btn-outline-warning" type="submit">Обновить</button>
+        </form>
     </div>
 {% endblock %}
