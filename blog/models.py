@@ -3,7 +3,6 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 
-
 # Create your models here.
 
 class News(models.Model):
@@ -33,3 +32,18 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
+
+class Message(models.Model):
+    # Каждое сообщение будет содержать поля:
+    # тема, текст сообщения, почта отправителя и дата
+    subject = models.CharField(max_length=250)
+    email = models.EmailField(max_length=100, default="")
+    text = models.TextField()
+    date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.subject
+    #
+    # class Meta:
+    #     verbose_name = 'Сообщение'
+    #     verbose_name_plural = 'Сообщения'
